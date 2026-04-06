@@ -9,17 +9,15 @@ from rest_framework import permissions
 router = routers.DefaultRouter() 
 router.register(r'autores', AutorViewSet) 
 router.register(r'livros', LivroViewSet) 
-schema_view = get_schema_view( 
-    openapi.Info( 
-        title="API Biblioteca", 
-        default_version='v1', 
-        description="Documentação da API de Biblioteca Digital", 
-        contact=openapi.Contact(email="contato@exemplo.com"), 
-        license=openapi.License(name="MIT"), 
-    ), 
-    public=True, 
-    permission_classes=(permissions.AllowAny,), 
-) 
+schema_view = get_schema_view(
+    openapi.Info(
+        title="API Biblioteca",
+        default_version='v1',
+        description="Documentação da API",
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 urlpatterns = [ 
     path('admin/', admin.site.urls), 
     path('api/', include(router.urls)), 

@@ -25,10 +25,11 @@ SECRET_KEY = 'django-insecure-j=(e&uu^o6lp7%qeii%f#l-tp=yf#*ska#y9tr6kx_0ubw3!%v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
+
+CORS_ALLOW_ALL_ORIGINS = True  # (apenas para dev)
 
 INSTALLED_APPS = [ 
 'django.contrib.admin', 
@@ -40,8 +41,22 @@ INSTALLED_APPS = [
 'rest_framework',         
 'livros',                  
 'rest_framework_simplejwt',
-'drf_yasg', 
+'drf_yasg',
+'corsheaders', 
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # or 'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
 
 SWAGGER_SETTINGS = {
 'SECURITY_DEFINITIONS': {
@@ -62,6 +77,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'biblioteca.urls'
