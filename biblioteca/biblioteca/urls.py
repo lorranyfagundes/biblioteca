@@ -6,6 +6,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from drf_yasg.views import get_schema_view 
 from drf_yasg import openapi 
 from rest_framework import permissions 
+from rest_framework.routers import DefaultRouter
+
 router = routers.DefaultRouter() 
 router.register(r'autores', AutorViewSet) 
 router.register(r'livros', LivroViewSet) 
@@ -24,5 +26,5 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'), 
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), 
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='swagger-ui'), 
-    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='redoc-ui'), 
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='redoc-ui'),
 ]
